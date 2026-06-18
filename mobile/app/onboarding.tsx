@@ -1,7 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View} from 'react-native'
 import React from 'react'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
+import Animated from 'react-native-reanimated';
+import RenderItem from '@/app/components/RenderItem';
+import slider from '@/service/options/OnboardingService'
+
 
 export default function Onboarding() {
   const finishOnboarding = async () => {
@@ -12,9 +16,19 @@ export default function Onboarding() {
 
   return (
     <View style={styles.container}>
-      <Text style={{
-        color: "#333"
-      }}>Hello</Text>
+      <Animated.FlatList
+        data={slider}
+        renderItem={({item, index}) => {
+          return <RenderItem item={item} index={index}/>
+        }}
+        keyExtractor={item => item.id}
+        scrollEventThrottle={16}
+        horizontal={true}
+        bounces={false}
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
+
+      />
     </View>
   )
 }
@@ -22,7 +36,5 @@ export default function Onboarding() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 })

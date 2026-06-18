@@ -22,9 +22,9 @@ export default function Index() {
 
   if (loading) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <ActivityIndicator />
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -33,9 +33,6 @@ export default function Index() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <Button
-        title="Hello"
-      />
     </SafeAreaView>
   );
 }
