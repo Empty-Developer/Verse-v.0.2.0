@@ -14,28 +14,28 @@ const slider: OnboardingData[] = [
     animation: require("@/assets/animated/Game asset-1.json"),
     text: "Collection of Texts: Publish",
     textColor: '#005b4f',
-    backgroundColor: '#ffa3ce'
+    backgroundColor: '#067FE2'
   },
   {
     id: 2,
-    animation: require("@/assets/animated/Gameasset.json"),
+    animation: require("@/assets/animated/Characters.json"),
     text: "Collection of Texts: Publish",
     textColor: '#005b4f',
-    backgroundColor: '#ffa3ce'
+    backgroundColor: '#E29700'
   },
   {
     id: 3,
     animation: require("@/assets/animated/Hero.json"),
     text: "Collection of Texts: Publish",
     textColor: '#005b4f',
-    backgroundColor: '#ffa3ce'
+    backgroundColor: '#A173CD'
   },
   {
     id: 4,
     animation: require("@/assets/animated/Animated movies.json"),
     text: "Collection of Texts: Publish",
     textColor: '#005b4f',
-    backgroundColor: '#ffa3ce'
+    backgroundColor: '#8BC151'
   },
 
 ];
