@@ -4,8 +4,9 @@ import React from "react";
 interface ButtonProps extends PressableProps {
   title: string;
   textStyle?: TextStyle;
-  style?: ViewStyle | ViewStyle[];
+  style?: ViewStyle | ViewStyle[]; // take style in screen for
 }
+
 
 const Button = ({title, style, textStyle, disabled, ...props}: ButtonProps) => {
   return (

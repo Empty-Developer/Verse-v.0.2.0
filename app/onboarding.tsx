@@ -20,14 +20,20 @@ export default function Onboarding() {
   };
 
   const flatListRef = useAnimatedRef<FlatList<OnboardingData>>();
-  /*
-    create a sharedValue named x
-    for the data scroll
-  */
+  /**
+   * @description create a sharesValue x
+   * for the data scroll
+   */
   const x = useSharedValue(0);
 
   const flatListIndex = useSharedValue(0);
 
+  /**
+   * @description this function take index screens
+   * and output screen correct
+   * @param {props} viewableItems - screens
+   * @returns {number}
+   */
   const onViewableItemsChanged = ({
     viewableItems,
   }: {
@@ -38,6 +44,10 @@ export default function Onboarding() {
     }
   };
 
+  /**
+   * @description this function made move in
+   * next screen
+   */
   const onScroll = useAnimatedScrollHandler({
     onScroll: (event) => {
       x.value = event.contentOffset.x;
@@ -59,19 +69,20 @@ export default function Onboarding() {
         bounces={false}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
-        /*
-          onViewableitemsChanged called
+       /**
+        * @description onViewableitemsChanged called
           when the viewability of rows changes
           as defined by the viewabilityConfig prop
         */
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={{
-          /*
-            minimumViewTime is minimum amount
-            of time (in milliseconds) that
+         /**
+          * @description that
             an item must be physically viewable
             before the viewability callback will
             be fired
+            @param {minimumViewTime} - minimumViewTime is minimum amount
+            of time (in milliseconds)
           */
           minimumViewTime: 300,
           viewAreaCoveragePercentThreshold: 10,
@@ -79,12 +90,12 @@ export default function Onboarding() {
       />
       <View style={styles.bottomContainer}>
         {/* pass data and x to pagination */}
-        <Pagination slider={slider} x={x}/>
+        <Pagination slider={slider} x={x} />
         <OnboardingBottom
           flatListRef={flatListRef}
           flatListIndex={flatListIndex}
           sliderLength={slider.length}
-          x={x}
+          // x={x}
         />
       </View>
     </View>
@@ -96,14 +107,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bottomContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     left: 0,
     right: 0,
     marginHorizontal: 30,
     paddingVertical: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  }
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 });
