@@ -10,7 +10,7 @@ import Animated, {
 import RenderItem from "@/app/components/RenderItem";
 import slider, { OnboardingData } from "@/service/options/OnboardingService";
 import Pagination from "@/app/components/ui/Pagination";
-import OnboardingBottom from "./components/ui/OnboardingBottom";
+import OnboardingBottom from "./components/ui/OnboardingButtom";
 
 export default function Onboarding() {
   const finishOnboarding = async () => {
