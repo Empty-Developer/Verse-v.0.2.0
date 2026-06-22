@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
     color: 'white',
     position: 'absolute',
     fontWeight: '600',
-    fontSize: 18,
+    fontSize: 20,
+    // fontFamily: "SF Compact Rounded"
   },
   iconStyle: {
     width: 24,

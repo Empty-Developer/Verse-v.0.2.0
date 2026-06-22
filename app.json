@@ -8,10 +8,12 @@
     "scheme": "mobile",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.mobile"
     },
+
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E05678",
@@ -23,10 +25,12 @@
       "predictiveBackGestureEnabled": false,
       "package": "com.anonymous.mobile"
     },
+
     "web": {
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
+
     "plugins": [
       "expo-router",
       [
@@ -40,8 +44,25 @@
             "backgroundColor": "#E05678"
           }
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/SF-Compact-Rounded-Ultralight.otf",
+            "./assets/fonts/SF-Compact-Rounded-Thin.otf",
+            "./assets/fonts/SF-Compact-Rounded-Light.otf",
+            "./assets/fonts/SF-Compact-Rounded-Regular.otf",
+            "./assets/fonts/SF-Compact-Rounded-Medium.otf",
+            "./assets/fonts/SF-Compact-Rounded-Semibold.otf",
+            "./assets/fonts/SF-Compact-Rounded-Bold.otf",
+            "./assets/fonts/SF-Compact-Rounded-Heavy.otf",
+            "./assets/fonts/SF-Compact-Rounded-Black.otf"
+          ]
+        }
       ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
