@@ -30,7 +30,7 @@ export const useAuthStore = create<AuthStore>()(
       login: async (email: string, password: string) => {
         try {
           const { data, error } = await supabase.auth.signInWithPassword({
-            // log out with password
+            // login with password
             email,
             password,
           });
@@ -89,7 +89,16 @@ export const useAuthStore = create<AuthStore>()(
           throw error;
         }
       },
-      logout: async () => {},
+      logout: async () => {
+        const { error } = await supabase.auth.signOut();
+
+        if (!error) {
+          set({
+            user: null,
+            isAuthenticated: false,
+          })
+        }
+      },
     }),
     {
       name: "auth-storage",
