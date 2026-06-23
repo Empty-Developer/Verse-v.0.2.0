@@ -27,7 +27,32 @@ export const useAuthStore = create<AuthStore>()(
     (set, get) => ({
       user: null,
       isAuthenticated: false,
-      login: async (email: string, password: string) => {},
+      login: async (email: string, password: string) => {
+        try {
+          const { data, error } = await supabase.auth.signInWithPassword({
+            // log out with password
+            email,
+            password,
+          });
+
+          if (data && data.user && !error) {
+            const { user } = data;
+
+            const newUser: User = {
+              id: user.id,
+              email: user.email!,
+              username: user.user_metadata.username,
+            };
+
+            set({
+              user: newUser,
+              isAuthenticated: true,
+            });
+          }
+        } catch (error) {
+          throw error;
+        }
+      },
       register: async (email: string, password: string, username: string) => {
         // check append user in store
         try {
@@ -37,10 +62,10 @@ export const useAuthStore = create<AuthStore>()(
             password,
             options: {
               data: {
-                username
-              }
-            }
-          })
+                username,
+              },
+            },
+          });
 
           if (data && data.user && !error) {
             const { user } = data;
@@ -52,16 +77,16 @@ export const useAuthStore = create<AuthStore>()(
             const newUser: User = {
               id: user.id,
               email: user.email!,
-              username: user.user_metadata.username
-            }
+              username: user.user_metadata.username,
+            };
 
             set({
               user: newUser,
               isAuthenticated: true,
-            })
+            });
           }
         } catch (error) {
-          throw error
+          throw error;
         }
       },
       logout: async () => {},
