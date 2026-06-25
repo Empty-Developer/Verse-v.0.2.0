@@ -1,13 +1,32 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { Link } from 'expo-router';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 export default function SigIn() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [isLoading, setLoading] = useState<boolean>(false)
+  const login = useAuthStore((state) => state.login)
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please fill in all the fields")
+      return
+    }
+
+    try {
+      setLoading(true)
+      await login(email, password)
+    } catch (error) {
+      Alert.alert("Error", "Error program")
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -38,6 +57,8 @@ export default function SigIn() {
       <Button
         title='Log in'
         style={styles.button}
+        onPress={handleLogin}
+        disabled={isLoading}
         textStyle={{
           fontWeight: '400',
           fontSize: 18,
