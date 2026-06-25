@@ -29,7 +29,7 @@ const Button = ({title, style, textStyle, disabled, ...props}: ButtonProps) => {
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 17,
+    paddingVertical: 16,
     paddingHorizontal: 16,
     borderRadius: 8,
     backgroundColor: "#000000ff",

@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '@/components/ui/Button';
@@ -28,7 +28,10 @@ export default function SigIn() {
     }
   }
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      style={styles.container}
+    >
       <LinearGradient
         start={{x: 0.1, y: 0.1}} end={{x: -2, y: 1}}
         locations={[0,0.1,0.4]}
@@ -50,7 +53,6 @@ export default function SigIn() {
         placeholder='Password'
         onChangeText={setPassword}
         value={password}
-        keyboardType='email-address'
         style={styles.input}
         secureTextEntry
       />
@@ -86,7 +88,7 @@ export default function SigIn() {
           title='Sign in Apple'
         />
       </View> */}
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: 25,
+    paddingHorizontal: 10,
   },
   background: {
     position: "absolute",
@@ -113,26 +115,29 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 18,
     textAlign: 'center',
-    padding: '4%'
+    padding: '4%',
+    color: '#666565ff'
   },
   input: {
     borderRadius: 50,
     padding: 15,
     fontSize: 15,
+    margin: 5,
   },
   button: {
     borderRadius: 50,
-    margin: 12
+    margin: 15
   },
-  lineOr: {
-    borderColor: "#000",
-    borderWidth: 0.5,
-    paddingHorizontal: 60,
-    margin: 12,
-    left: 0,
-    right: 0,
-    top: 0,
-  },
+
+  // lineOr: {
+  //   borderColor: "#000",
+  //   borderWidth: 0.5,
+  //   paddingHorizontal: 60,
+  //   margin: 12,
+  //   left: 0,
+  //   right: 0,
+  //   top: 0,
+  // },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
