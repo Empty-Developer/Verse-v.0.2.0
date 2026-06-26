@@ -1,62 +1,27 @@
+import { useAuthStore } from "@/stores/useAuthStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Redirect } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Button from "./components/ui/Button";
 
 export default function Index() {
-  const [loading, setLoading] = useState(true);
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState<boolean | null>(null);
 
   useEffect(() => {
-    checkOnboarding();
+    AsyncStorage.getItem("onboarding").then((value) => {
+      setCompleted(value === "true");
+    });
   }, []);
 
-  /*
-    TODO:
-    1 - create liner gradient for circle onboarding
-    2 - append a new fonts
-    3 - think about the colors for onboarding
-    ------------
-    4 - create a new screen witch choice themes
-  */
-
-  const checkOnboarding = async () => {
-    const value = await AsyncStorage.getItem("onboarding");
-
-    setCompleted(value === "true");
-    setLoading(false);
-  };
-
-  if (loading) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
-
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
+  if (completed === null) return null;
   if (!completed) {
-    return <Redirect href="/onboarding" />;
+    return <Redirect href="/onboarding" />
   }
+  if (isAuthenticated) {
+    return <Redirect href="/(protected)/(tabs)" />
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-    </SafeAreaView>
+    <Redirect href="/(auth)/sign-in" />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  // background: {
-  //   position: "absolute",
-  //   left: 0,
-  //   right: 0,
-  //   top: 0,
-  //   height: 1200
-  // },
-});
